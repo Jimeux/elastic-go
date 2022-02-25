@@ -1,0 +1,23 @@
+{
+  "index_patterns": ["address*"],
+  "template": {
+    "settings": {
+      "number_of_shards": 1
+    },
+    "mappings": {
+      "properties": {
+        "id": {
+          "type": "long"
+        },
+        "line_1": {
+          "type": "keyword"
+        },
+        "line_2": {
+          "type": "keyword"
+        }
+      }
+    }
+  },
+  "priority": 1,
+  "version": 1
+}

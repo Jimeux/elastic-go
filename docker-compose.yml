@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.0.0
+    container_name: elasticsearch
+    ports:
+      - "9210:9200"
+      - "9310:9300"
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: false
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+      # - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    networks:
+      - esnet
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.0.0
+    container_name: kibana
+    ports:
+      - "5610:5601"
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9210
+    networks:
+      - esnet
+    # volumes:
+    #   - ./kibana.yml:/usr/share/kibana/config/kibana.yml
+
+volumes:
+  esdata1:
+    driver: local
+
+networks:
+  esnet:
